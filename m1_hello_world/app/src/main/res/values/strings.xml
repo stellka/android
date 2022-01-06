@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">My First Application</string>
+    <string name="testText">Text for Skillbox education</string>
+    <string name="textName">Пассажиров слишком много!</string>
+    <string name="textNameTwo">Все места свободны</string>
+    <string name="textNameThree">Осталость мест:</string>
+    <string name="textNameFore">Сброс</string>
+</resources>

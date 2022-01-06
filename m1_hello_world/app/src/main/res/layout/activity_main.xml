@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/skillboxTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="6"
+        android:text="@string/textNameTwo"
+        android:textColor="#4DCE5A"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/botton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:background="@color/white"
+        android:text="0"
+        android:textSize="100dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|right"
+        android:textSize="30dp"
+        android:textColor="#3034A8"/>
+
+    <TextView
+        android:id="@+id/skillboxTextViewTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="6"
+        android:visibility="invisible"
+        android:text="@string/textNameThree"
+        android:textColor="#3034A8"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/skillboxTextViewThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:text="@string/textName"
+        android:textColor="#FF0000"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/plusThreeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:text="@string/textNameFore"
+        android:background="#CBCBCB"
+        android:layout_gravity="center_horizontal"/>
+
+    <ImageButton
+        android:id="@+id/plusOneButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:background="@drawable/selector_button"
+        android:padding="50dp"
+        android:src="@drawable/outline_add_24" />
+
+    <ImageButton
+        android:id="@+id/plusOTwoButton"
+        android:background="@drawable/selector_button"
+        android:padding="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|bottom"
+        android:src="@drawable/outline_remove_24"/>
+
+</FrameLayout>
