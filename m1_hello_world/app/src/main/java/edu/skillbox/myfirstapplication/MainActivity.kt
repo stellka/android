@@ -16,8 +16,7 @@ class MainActivity : AppCompatActivity() {
         binding.skillboxTextViewTwo.visibility = View.VISIBLE
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private fun renew(){
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.plusOTwoButton.isEnabled = false
@@ -76,6 +75,10 @@ class MainActivity : AppCompatActivity() {
             binding.skillboxTextView.text =
                 binding.skillboxTextView.context.getText(R.string.textNameTwo)
         }
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        renew()
     }
 }
