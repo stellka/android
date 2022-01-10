@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">LayoutApp</string>
+    <string name="up_string">Верхняя строчка</string>
+    <string name="bottom_string">Нижняя строчка</string>
+</resources>
