@@ -8,6 +8,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.google.android.material.slider.Slider
 import kotlinx.coroutines.*
+import kotlinx.coroutines.NonCancellable.isActive
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,44 +23,38 @@ class MainActivity : AppCompatActivity() {
         val textik = findViewById<TextView>(R.id.textik)
         val slid = findViewById<Slider>(R.id.slider)
 
-        val updateProgress = {
-            circleProgress.progress = currentProgress
+        circleProgress.max = 60
 
+        slid.addOnChangeListener { _, _, _ ->
+            textik.text = slid.value.toInt().toString()
+        }
+
+
+
+        fun main() {
+            val updateProgress = {
+                circleProgress.progress = currentProgress
+            }
+
+            currentProgress = slid.value.toInt()
+            slid.isEnabled = false
+            val scope = CoroutineScope(Dispatchers.Main)
+
+            scope.launch {
+                while (currentProgress > 0) {
+                    currentProgress--
+                    textik.text = currentProgress.toString()
+                    updateProgress()
+                }
+                delay(1000)
+            }
+            //if (currentProgress == 0)
+                //scope.cancel()
         }
 
         button.setOnClickListener {
             button.text = "STOP"
-
-            val parentJob = Job()
-            val scope = CoroutineScope(parentJob + Dispatchers.Default)
-            suspend fun main() {
-                var i = slid.value.toInt()
-                scope.launch {
-                    while (isActive) {
-                        yield()
-                        while (i > 0) {
-                            if (currentProgress > 0) {
-                                currentProgress -= 1
-                                updateProgress()
-                            }
-                            slid.isActivated = false
-                            i--
-                            textik.text = i.toString()
-                        }
-                        if (i == 0) {
-                            button.text = "START"
-                            cancel()
-                        }
-                        delay(500)
-                    }
-                    parentJob.complete()
-                }
-
-                slid.addOnChangeListener { _, _, _ ->
-                    // Responds to when slider's value is changed
-                    textik.text = slid.value.toInt().toString()
-                }
-            }
+            main()
         }
     }
 }

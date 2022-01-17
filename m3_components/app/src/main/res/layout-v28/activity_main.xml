@@ -12,7 +12,7 @@
         android:layout_height="200dp"
         android:layout_centerInParent="true"
         android:indeterminateOnly="false"
-        android:max="60"
+        android:max="100"
         android:progressDrawable="@drawable/circle_progress"
         android:rotation="-90"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-
+        android:text="10"
         android:textColor="@color/black"
         android:textSize="70dp" />
 
@@ -44,9 +44,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/progressBarCircular"
         android:layout_marginTop="7dp"
-        android:stepSize="0.0"
-        android:valueFrom="10.0"
-        android:valueTo="60.0" />
+        android:stepSize="10"
+        android:valueFrom="0.0"
+        android:valueTo="60" />
 
     <Button
         android:id="@+id/button_start"
@@ -57,25 +57,11 @@
         android:layout_marginTop="150dp"
         android:gravity="center"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:outlineAmbientShadowColor="@color/purple_700"
         android:text="@string/text1"
-        android:visibility="visible"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/button_stop"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/progressBarCircular"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:gravity="center"
-        android:visibility="invisible"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:text="@string/text2"
-        android:textSize="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </RelativeLayout>
