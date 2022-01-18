@@ -57,7 +57,7 @@
         android:layout_marginTop="150dp"
         android:gravity="center"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:text="@string/text1"
+        android:text="@string/text_one"
         android:visibility="visible"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"

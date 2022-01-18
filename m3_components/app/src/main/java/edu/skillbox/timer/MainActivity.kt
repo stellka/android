@@ -1,11 +1,13 @@
 package edu.skillbox.timer
 
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import com.google.android.material.slider.Slider
 import kotlinx.coroutines.*
 import kotlinx.coroutines.NonCancellable.isActive
@@ -20,41 +22,70 @@ class MainActivity : AppCompatActivity() {
 
         val circleProgress = findViewById<ProgressBar>(R.id.progressBarCircular)
         val button = findViewById<Button>(R.id.button_start)
+        val button2 = findViewById<Button>(R.id.button_stop)
         val textik = findViewById<TextView>(R.id.textik)
         val slid = findViewById<Slider>(R.id.slider)
 
-        circleProgress.max = 60
+        textik.text = "0"
 
         slid.addOnChangeListener { _, _, _ ->
             textik.text = slid.value.toInt().toString()
         }
 
-
+        var i = 0
 
         fun main() {
+
             val updateProgress = {
                 circleProgress.progress = currentProgress
             }
 
-            currentProgress = slid.value.toInt()
-            slid.isEnabled = false
             val scope = CoroutineScope(Dispatchers.Main)
 
             scope.launch {
-                while (currentProgress > 0) {
-                    currentProgress--
-                    textik.text = currentProgress.toString()
+                currentProgress = 0
+                i = slid.value.toInt()
+                slid.isEnabled = false
+                circleProgress.max = i
+                button2.visibility = Button.VISIBLE
+                button.visibility = Button.INVISIBLE
+                updateProgress()
+                while (i > 0) {
+
+                    i--
+                    currentProgress++
+                    textik.text = i.toString()
                     updateProgress()
+                    delay(1000)
+
+                    if (i == 0) {
+                        cancel()
+                        button.visibility = Button.VISIBLE
+                        button2.visibility = Button.INVISIBLE
+                        slid.isEnabled = true
+                        textik.text = slid.value.toInt().toString()
+                        circleProgress.progress = 0
+                        circleProgress.progressDrawable
+                    }
                 }
-                delay(1000)
             }
-            //if (currentProgress == 0)
-                //scope.cancel()
+
+            button2.setOnClickListener {
+                button.visibility = Button.VISIBLE
+                button2.visibility = Button.INVISIBLE
+                slid.isEnabled = true
+                textik.text = slid.value.toInt().toString()
+                circleProgress.progress = 0
+                scope.cancel()
+                Toast.makeText(this, "Время вышло!", Toast.LENGTH_SHORT).show()
+            }
         }
 
         button.setOnClickListener {
-            button.text = "STOP"
+            Toast.makeText(this, "Время пошло!", Toast.LENGTH_SHORT).show()
             main()
+            button2.visibility = Button.VISIBLE
+            button.visibility = Button.INVISIBLE
         }
     }
 }
