@@ -27,65 +27,79 @@ class MainActivity : AppCompatActivity() {
         val slid = findViewById<Slider>(R.id.slider)
 
         textik.text = "0"
+        var i: Int
 
         slid.addOnChangeListener { _, _, _ ->
             textik.text = slid.value.toInt().toString()
         }
 
-        var i = 0
+        val updateProgressBar = {
+            circleProgress.progress = currentProgress
+        }
 
-        fun main() {
+        fun updateUI(){
+            slid.isEnabled = false
+            button2.visibility = Button.VISIBLE
+            button.visibility = Button.INVISIBLE
+            updateProgressBar()
+        }
 
-            val updateProgress = {
-                circleProgress.progress = currentProgress
-            }
+        fun updateTheSecondUI(){
+            button.visibility = Button.VISIBLE
+            button2.visibility = Button.INVISIBLE
+            slid.isEnabled = true
+            Toast.makeText(this, "Время вышло!", Toast.LENGTH_SHORT).show()
+        }
+
+        fun startWorking() {
 
             val scope = CoroutineScope(Dispatchers.Main)
 
-            scope.launch {
-                currentProgress = 0
-                i = slid.value.toInt()
-                slid.isEnabled = false
-                circleProgress.max = i
-                button2.visibility = Button.VISIBLE
-                button.visibility = Button.INVISIBLE
-                updateProgress()
-                while (i > 0) {
+            fun launchTimer(){
 
-                    i--
-                    currentProgress++
-                    textik.text = i.toString()
-                    updateProgress()
-                    delay(1000)
+                scope.launch {
+                    currentProgress = 0
+                    i = slid.value.toInt()
+                    updateUI()
+                    circleProgress.max = i
 
-                    if (i == 0) {
-                        cancel()
-                        button.visibility = Button.VISIBLE
-                        button2.visibility = Button.INVISIBLE
-                        slid.isEnabled = true
-                        textik.text = slid.value.toInt().toString()
-                        circleProgress.progress = 0
-                        circleProgress.progressDrawable
+                    while (i > 0) {
+                        i--
+                        currentProgress++
+                        textik.text = i.toString()
+                        updateProgressBar()
+                        delay(1000)
+
+                        if (i == 0) {
+                            cancel()
+                            updateTheSecondUI()
+                            textik.text = slid.value.toInt().toString()
+                            circleProgress.progress = 0
+                            circleProgress.progressDrawable
+                        }
                     }
                 }
             }
 
-            button2.setOnClickListener {
-                button.visibility = Button.VISIBLE
-                button2.visibility = Button.INVISIBLE
-                slid.isEnabled = true
-                textik.text = slid.value.toInt().toString()
-                circleProgress.progress = 0
-                scope.cancel()
-                Toast.makeText(this, "Время вышло!", Toast.LENGTH_SHORT).show()
+            fun suspendTimer(){
+                button2.setOnClickListener {
+                    updateTheSecondUI()
+                    textik.text = slid.value.toInt().toString()
+                    circleProgress.progress = 0
+                    scope.cancel()
+                }
             }
+
+            //если выношу определение функций за startWorking(), то таймер работает неправильно
+
+            launchTimer()
+            suspendTimer()
         }
 
         button.setOnClickListener {
             Toast.makeText(this, "Время пошло!", Toast.LENGTH_SHORT).show()
-            main()
-            button2.visibility = Button.VISIBLE
-            button.visibility = Button.INVISIBLE
+            startWorking()
+            updateUI()
         }
     }
 }
