@@ -1,16 +1,13 @@
 package edu.skillbox.timer
 
-import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.slider.Slider
 import kotlinx.coroutines.*
-import kotlinx.coroutines.NonCancellable.isActive
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,14 +34,14 @@ class MainActivity : AppCompatActivity() {
             circleProgress.progress = currentProgress
         }
 
-        fun updateUI(){
+        fun updateUI() {
             slid.isEnabled = false
             button2.visibility = Button.VISIBLE
             button.visibility = Button.INVISIBLE
             updateProgressBar()
         }
 
-        fun updateTheSecondUI(){
+        fun updateTheSecondUI() {
             button.visibility = Button.VISIBLE
             button2.visibility = Button.INVISIBLE
             slid.isEnabled = true
@@ -55,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
             val scope = CoroutineScope(Dispatchers.Main)
 
-            fun launchTimer(){
+            fun launchTimer() {
 
                 scope.launch {
                     currentProgress = 0
@@ -81,7 +78,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            fun suspendTimer(){
+            fun suspendTimer() {
                 button2.setOnClickListener {
                     updateTheSecondUI()
                     textik.text = slid.value.toInt().toString()
