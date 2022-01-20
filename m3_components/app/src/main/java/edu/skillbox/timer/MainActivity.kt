@@ -48,54 +48,41 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Время вышло!", Toast.LENGTH_SHORT).show()
         }
 
-        fun startWorking() {
+
+        button.setOnClickListener {
+            Toast.makeText(this, "Время пошло!", Toast.LENGTH_SHORT).show()
 
             val scope = CoroutineScope(Dispatchers.Main)
 
-            fun launchTimer() {
+            scope.launch {
+                currentProgress = 0
+                i = slid.value.toInt()
+                updateUI()
+                circleProgress.max = i
 
-                scope.launch {
-                    currentProgress = 0
-                    i = slid.value.toInt()
-                    updateUI()
-                    circleProgress.max = i
+                while (i > 0) {
+                    i--
+                    currentProgress++
+                    textik.text = i.toString()
+                    updateProgressBar()
+                    delay(1000)
 
-                    while (i > 0) {
-                        i--
-                        currentProgress++
-                        textik.text = i.toString()
-                        updateProgressBar()
-                        delay(1000)
-
-                        if (i == 0) {
-                            cancel()
-                            updateTheSecondUI()
-                            textik.text = slid.value.toInt().toString()
-                            circleProgress.progress = 0
-                            circleProgress.progressDrawable
-                        }
+                    if (i == 0) {
+                        cancel()
+                        updateTheSecondUI()
+                        textik.text = slid.value.toInt().toString()
+                        circleProgress.progress = 0
+                        circleProgress.progressDrawable
                     }
                 }
             }
 
-            fun suspendTimer() {
-                button2.setOnClickListener {
-                    updateTheSecondUI()
-                    textik.text = slid.value.toInt().toString()
-                    circleProgress.progress = 0
-                    scope.cancel()
-                }
+            button2.setOnClickListener {
+                updateTheSecondUI()
+                textik.text = slid.value.toInt().toString()
+                circleProgress.progress = 0
+                scope.cancel()
             }
-
-            //если выношу определение функций за startWorking(), то таймер работает неправильно
-
-            launchTimer()
-            suspendTimer()
-        }
-
-        button.setOnClickListener {
-            Toast.makeText(this, "Время пошло!", Toast.LENGTH_SHORT).show()
-            startWorking()
             updateUI()
         }
     }
