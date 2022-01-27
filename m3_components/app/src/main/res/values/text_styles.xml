@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Skillbox" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/proxima_nova</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="Skillbox.textSmall">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Skillbox.Big">
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="Skillbox.Huge">
+        <item name="android:textSize">20sp</item>
+    </style>
+</resources>
