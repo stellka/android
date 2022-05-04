@@ -14,4 +14,13 @@
         <!-- Customize your theme here. -->
         <item name="fontFamily">@font/opensans_bold</item>
     </style>
+
+    <style name="Theme.Quiz.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Quiz.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Quiz.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
