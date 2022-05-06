@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
-        android:name="edu.skillbox.quiz.ResultFragment"
+        android:name="edu.skillbox.quiz.ui.ResultFragment"
         android:label="fragment_result"
         tools:layout="@layout/fragment_result" >
         <action

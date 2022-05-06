@@ -30,28 +30,29 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        var index:Int
+        _binding = FragmentSecondBinding.inflate(inflater)
+        var index:String
 
         val radioGroup1 = binding.radio1
         radioGroup1.setOnCheckedChangeListener{_, buttonId ->
             when (buttonId){
-                R.id.radioButton1 -> index = 0
-                R.id.radioButton2 -> index = 1
-                R.id.radioButton3 -> index = 2
-                R.id.radioButton4 -> index = 3
+                R.id.radioButton1 -> index = "Вам не нравится наш курс."
+                R.id.radioButton2 -> index = "Вас удовлетворяет наш курс."
+                R.id.radioButton3 -> index = "Вы оценили наш курс хорошо."
+                R.id.radioButton4 -> index = "Вы оценили наш курс отлично."
             }
         }
 
 
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+
 
         val quiz = QuizStorage
         binding.send.setOnClickListener {
             val bundle = Bundle().apply {
-                putString("param1", quiz.answer(quiz = quiz.getQuiz(QuizStorage.Locale.Ru), answers = listOf(1)))
+                putString("param1", binding.radio2Button1.toString())
             }
             parentFragmentManager.commit {
-                replace<ResultFragment>(containerViewId = R.id.fragment_container_view_tag, args = bundle)
+                replace<ResultFragment>(containerViewId = R.id.resultFragment, args = bundle)
                 addToBackStack(ResultFragment::class.java.simpleName)
             }
         }
@@ -60,10 +61,6 @@ class SecondFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        binding.send.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_resultFragment)
-        }
 
         binding.back.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
