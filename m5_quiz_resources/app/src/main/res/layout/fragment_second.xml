@@ -26,11 +26,11 @@
 
 
             <TextView
-                android:id="@+id/text1"
+                android:id="@+id/radioQuestion1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Как тебе наш Android курс?"
+
                 app:layout_constraintTop_toBottomOf="parent" />
 
             <RadioGroup
@@ -44,38 +44,31 @@
                 <RadioButton
                     android:id="@+id/radioButton1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="на 2" />
+                    android:layout_height="wrap_content" />
 
                 <RadioButton
                     android:id="@+id/radioButton2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="на 3" />
+                    android:layout_height="wrap_content" />
 
                 <RadioButton
                     android:id="@+id/radioButton3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:text="на 4" />
+                    />
 
                 <RadioButton
                     android:id="@+id/radioButton4"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="на 5" />
+                    android:layout_height="wrap_content" />
 
             </RadioGroup>
 
             <TextView
-                android:id="@+id/text2"
+                android:id="@+id/radioQuestion2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Порекомендуешь его друзьям?"
                 app:layout_constraintTop_toBottomOf="parent" />
 
             <RadioGroup
@@ -89,37 +82,32 @@
                 <RadioButton
                     android:id="@+id/radio2Button1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Обязательно" />
+                    android:layout_height="wrap_content" />
 
                 <RadioButton
                     android:id="@+id/radio2Button2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:text="Уже порекомендовал" />
+                    />
 
                 <RadioButton
                     android:id="@+id/radio2Button3"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Посмотрим, что будет дальше" />
+                    android:layout_height="wrap_content" />
 
                 <RadioButton
                     android:id="@+id/radio2Button4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:text="Нет" />
+                    />
 
             </RadioGroup>
 
             <TextView
-                android:id="@+id/text3"
+                android:id="@+id/radioQuestion3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Пользовался ли ты обратной связью?"
                 app:layout_constraintTop_toBottomOf="parent" />
 
             <RadioGroup
@@ -134,29 +122,26 @@
                     android:id="@+id/radio3Button1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:text="Да" />
+                    />
 
                 <RadioButton
                     android:id="@+id/radio3Button2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="Еще нет, но сейчас воспользуюсь" />
+                     />
 
                 <RadioButton
                     android:id="@+id/radio3Button3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:text="Нет, еще не приходилось" />
+                     />
 
                 <RadioButton
                     android:id="@+id/radio3Button4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:text="Нет, и не буду" />
+                    />
 
             </RadioGroup>
 
@@ -164,6 +149,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/back"
@@ -182,7 +168,6 @@
                     android:text="@string/text_send"
                     app:layout_constraintEnd_toEndOf="parent" />
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

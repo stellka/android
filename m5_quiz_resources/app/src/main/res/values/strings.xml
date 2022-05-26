@@ -30,6 +30,7 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="opros">Опрос</string>
+
     <string name="text_back">Назад</string>
     <string name="text_send">Отправить</string>
 </resources>

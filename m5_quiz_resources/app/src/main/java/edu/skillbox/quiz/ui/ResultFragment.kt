@@ -23,6 +23,7 @@ class ResultFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var param3: String? = null
 
     private var _binding: FragmentResultBinding? = null
     private val binding get() = _binding!!
@@ -32,6 +33,7 @@ class ResultFragment : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+
         }
     }
 
@@ -46,13 +48,12 @@ class ResultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.parametr.text = param1
+        binding.parameter1.text = param1
 
         binding.button.setOnClickListener {
-            findNavController().navigate(R.id.action_resultFragment_to_FirstFragment)
+            findNavController().navigate(R.id.action_resultFragment_to_SecondFragment)
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
