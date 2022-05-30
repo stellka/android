@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.RadioGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
@@ -55,7 +57,6 @@ class SecondFragment : Fragment() {
 
         _binding = FragmentSecondBinding.inflate(inflater)
 
-
         binding.radioQuestion1.text = questionsList.questions[0].question
         binding.radioQuestion2.text = questionsList.questions[1].question
         binding.radioQuestion3.text = questionsList.questions[2].question
@@ -83,6 +84,7 @@ class SecondFragment : Fragment() {
                 R.id.radioButton3 -> answer1 = 2
                 R.id.radioButton4 -> answer1 = 3
             }
+            setAlpha(binding.radio1)
         }
 
 
@@ -93,6 +95,7 @@ class SecondFragment : Fragment() {
                 R.id.radio2Button3 -> answer2 = 2
                 R.id.radio2Button4 -> answer2 = 3
             }
+            setAlpha(binding.radio2)
         }
 
         binding.radio3.setOnCheckedChangeListener { _, buttonId ->
@@ -102,12 +105,19 @@ class SecondFragment : Fragment() {
                 R.id.radio3Button3 -> answer3 = 2
                 R.id.radio3Button4 -> answer3 = 3
             }
+            setAlpha(binding.radio3)
         }
 
         return binding.root
     }
 
     val answers = listOf(answer1, answer2, answer3)
+    fun setAlpha(element: RadioGroup) {
+        element.animate().apply {
+            alpha(0.5f)
+        }.start()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         binding.send.setOnClickListener {

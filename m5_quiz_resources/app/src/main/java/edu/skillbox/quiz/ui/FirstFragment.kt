@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.navigation.fragment.findNavController
 import edu.skillbox.quiz.R
 import edu.skillbox.quiz.databinding.FragmentFirstBinding
@@ -21,6 +22,7 @@ class FirstFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,6 +36,12 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.start.animate().apply {
+            duration = 3000
+            rotation(360f)
+            translationY(-10f)
+            interpolator = AccelerateDecelerateInterpolator()
+        }.start()
 
         binding.start.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)

@@ -1,10 +1,14 @@
 package edu.skillbox.quiz.ui
 
+import android.animation.*
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.AccelerateInterpolator
 import androidx.navigation.fragment.findNavController
 import edu.skillbox.quiz.R
 import edu.skillbox.quiz.databinding.FragmentResultBinding
@@ -23,7 +27,6 @@ class ResultFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var param3: String? = null
 
     private var _binding: FragmentResultBinding? = null
     private val binding get() = _binding!!
@@ -33,7 +36,6 @@ class ResultFragment : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
-
         }
     }
 
@@ -43,8 +45,39 @@ class ResultFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentResultBinding.inflate(inflater)
+
+        ObjectAnimator.ofArgb(binding.button,
+        "textColor", Color.parseColor("#FFFF0000"),
+            Color.parseColor("#FF0000FF")).apply {
+            duration = 4000
+            interpolator = AccelerateDecelerateInterpolator()
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+            start()
+        }
+
+        ObjectAnimator.ofArgb(binding.res,
+            "textColor", Color.parseColor("#FFFF0000"),
+            Color.parseColor("#FF0000FF")).apply {
+            duration = 4000
+            interpolator = AccelerateDecelerateInterpolator()
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+            start()
+        }
+        ObjectAnimator.ofArgb(binding.parameter1,
+            "textColor", Color.parseColor("#FFFF0000"),
+            Color.parseColor("#FF0000FF")).apply {
+            duration = 4000
+            interpolator = AccelerateDecelerateInterpolator()
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+            start()
+        }
         return binding.root
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,6 +86,8 @@ class ResultFragment : Fragment() {
         binding.button.setOnClickListener {
             findNavController().navigate(R.id.action_resultFragment_to_SecondFragment)
         }
+
+
     }
 
     override fun onDestroyView() {

@@ -33,4 +33,5 @@
 
     <string name="text_back">Назад</string>
     <string name="text_send">Отправить</string>
+    <string name="start">Начать</string>
 </resources>

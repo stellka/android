@@ -7,17 +7,23 @@
     tools:context=".ui.SecondFragment">
 
     <ScrollView
+        android:id="@+id/scrolling"
+        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/layout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusable="true"
             android:orientation="vertical"
             tools:context=".ui.Quiz">
 
             <TextView
+                android:id="@+id/opros"
                 android:layout_width="match_parent"
+                android:focusable="true"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/opros"
@@ -37,7 +43,7 @@
                 android:id="@+id/radio1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:focusable="true"
                 app:layout_constraintStart_toStartOf="@+id/text1"
                 app:layout_constraintTop_toBottomOf="@+id/text1">
 
@@ -75,7 +81,7 @@
                 android:id="@+id/radio2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:focusable="true"
                 app:layout_constraintStart_toStartOf="@+id/text2"
                 app:layout_constraintTop_toBottomOf="@+id/text2">
 
@@ -114,7 +120,7 @@
                 android:id="@+id/radio3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:focusable="true"
                 app:layout_constraintStart_toStartOf="@+id/text1"
                 app:layout_constraintTop_toBottomOf="@+id/text1">
 
