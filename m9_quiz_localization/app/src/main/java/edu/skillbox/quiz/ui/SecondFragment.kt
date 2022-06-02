@@ -35,7 +35,7 @@ class SecondFragment : Fragment() {
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
 
-    private val questionsList = QuizStorage.getQuiz(QuizStorage.Locale.Ru)
+    private val questionsList = QuizStorage.getQuiz(QuizStorage.Locale.En)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,8 +111,8 @@ class SecondFragment : Fragment() {
         return binding.root
     }
 
-    val answers = listOf(answer1, answer2, answer3)
-    fun setAlpha(element: RadioGroup) {
+    private val answers = listOf(answer1, answer2, answer3)
+    private fun setAlpha(element: RadioGroup) {
         element.animate().apply {
             alpha(0.5f)
         }.start()

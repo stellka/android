@@ -14,7 +14,6 @@
         <activity
             android:name=".ui.NavigationActivity"
             android:exported="true"
-            android:label="@string/title_activity_navigation"
             android:theme="@style/Theme.Quiz.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
