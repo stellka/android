@@ -19,10 +19,7 @@
     <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
     <string name="welcome" translatable="false">WELCOME!</string>
 
-
     <string name="title_activity_navigation" translatable="false">NavigationActivity</string>
-
-
 
     <string name="next" translatable="false">Next</string>
     <string name="previous" translatable="false">Previous</string>

@@ -19,6 +19,7 @@ import edu.skillbox.quiz.R
 import edu.skillbox.quiz.databinding.FragmentFirstBinding
 import edu.skillbox.quiz.databinding.FragmentSecondBinding
 import edu.skillbox.quiz.quiz.QuizStorage
+import java.util.*
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -35,7 +36,8 @@ class SecondFragment : Fragment() {
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
 
-    private val questionsList = QuizStorage.getQuiz(QuizStorage.Locale.En)
+    private var questionsList = QuizStorage.getQuiz(QuizStorage.Locale.En)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +46,7 @@ class SecondFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
 
         }
+
     }
 
     var answer1 = 1
@@ -56,6 +59,10 @@ class SecondFragment : Fragment() {
     ): View {
 
         _binding = FragmentSecondBinding.inflate(inflater)
+
+        if (Locale.getDefault().language == "ru"){
+            questionsList = QuizStorage.getQuiz(QuizStorage.Locale.Ru)
+        }
 
         binding.radioQuestion1.text = questionsList.questions[0].question
         binding.radioQuestion2.text = questionsList.questions[1].question
