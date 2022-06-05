@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     val slid = findViewById<Slider>(R.id.slider)
     var isTimerRun = true
 
+    val scope = CoroutineScope(Dispatchers.Main)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,28 +74,28 @@ class MainActivity : AppCompatActivity() {
 
             scope.launch {
 
-                    currentProgress = 0
-                    i = slid.value.toInt()
-                    updateUI()
-                    circleProgress.max = i
+                currentProgress = 0
+                i = slid.value.toInt()
+                updateUI()
+                circleProgress.max = i
 
 
-                    while (i > 0) {
-                        i--
-                        currentProgress++
-                        textik.text = i.toString()
-                        updateProgressBar()
-                        delay(1000)
+                while (i > 0) {
+                    i--
+                    currentProgress++
+                    textik.text = i.toString()
+                    updateProgressBar()
+                    delay(1000)
 
-                        if (i == 0) {
-                            cancel()
-                            updateTheSecondUI()
-                            textik.text = slid.value.toInt().toString()
-                            circleProgress.progress = 0
-                            circleProgress.progressDrawable
-                        }
+                    if (i == 0) {
+                        cancel()
+                        updateTheSecondUI()
+                        textik.text = slid.value.toInt().toString()
+                        circleProgress.progress = 0
+                        circleProgress.progressDrawable
                     }
                 }
+            }
 
 
             handler.post{
@@ -106,11 +108,10 @@ class MainActivity : AppCompatActivity() {
                 updateUI()
             }
         }
-        }
-
-
-        override fun onSaveInstanceState(outState: Bundle) {
-            outState.putString(KEY, "string")
-            super.onSaveInstanceState(outState)
-        }
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString(KEY, "string")
+        super.onSaveInstanceState(outState)
+    }
+}
