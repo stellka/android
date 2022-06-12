@@ -17,19 +17,18 @@ private const val KEY = "key"
 
 class MainActivity : AppCompatActivity() {
 
-    private var currentProgress: Int = 0
-    val circleProgress = findViewById<ProgressBar>(R.id.progressBarCircular)
-    val button = findViewById<Button>(R.id.button_start)
-    val button2 = findViewById<Button>(R.id.button_stop)
-    val textik = findViewById<TextView>(R.id.textik)
-    val slid = findViewById<Slider>(R.id.slider)
-    var isTimerRun = true
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
+        var currentProgress: Int = 0
+        val circleProgress = findViewById<ProgressBar>(R.id.progressBarCircular)
+        val button = findViewById<Button>(R.id.button_start)
+        val button2 = findViewById<Button>(R.id.button_stop)
+        val textik = findViewById<TextView>(R.id.textik)
+        val slid = findViewById<Slider>(R.id.slider)
+        var isTimerRun = true
+
         savedInstanceState?.let { bundle ->
             bundle.getString(KEY, "default value")
         }

@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.os.PersistableBundle
-import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -13,104 +11,113 @@ import android.widget.Toast
 import com.google.android.material.slider.Slider
 import edu.skillbox.timer.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
+import kotlin.math.IEEErem
 
 private const val KEY = "key"
+private const val KEY_INT = "int"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    var currentProgress = 0
-    var i = 0
-
-    var count = 0
-
-
+    var i: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
+        var currentProgress = 0
+        val circleProgress = findViewById<ProgressBar>(R.id.progressBarCircular)
+        val button = findViewById<Button>(R.id.button_start)
+        val button2 = findViewById<Button>(R.id.button_stop)
+        val textik = findViewById<TextView>(R.id.textik)
+        val slid = findViewById<Slider>(R.id.slider)
+//        var isTimerRun = true
 
-        binding.textik.text = "0"
 
-        savedInstanceState?.getInt(KEY, count)
+        var count = 0
+        count = savedInstanceState?.getInt(KEY_INT, i)!!
+        binding.textik.text = count.toString()
 
-        binding.slider.addOnChangeListener { _, _, _ ->
-            binding.textik.text = binding.slider.value.toInt().toString()
+        val handler = Handler(Looper.getMainLooper())
+        textik.text = "0"
+
+        slid.addOnChangeListener { _, _, _ ->
+            textik.text = slid.value.toInt().toString()
         }
 
-        startTimer(i)
-    }
-    val updateProgressBar = {
-        binding.progressBarCircular.progress = currentProgress
-    }
-    fun updateUI() {
-        binding.slider.isEnabled = false
-        binding.buttonStop.visibility = Button.VISIBLE
-        binding.buttonStart.visibility = Button.INVISIBLE
-        updateProgressBar()
-    }
+        fun updateUI() {
+            slid.isEnabled = false
+            button2.visibility = Button.VISIBLE
+            button.visibility = Button.INVISIBLE
+            circleProgress.progress = currentProgress
+        }
 
-    fun updateTheSecondUI() {
-        binding.buttonStart.visibility = Button.VISIBLE
-        binding.buttonStop.visibility = Button.INVISIBLE
-        binding.slider.isEnabled = true
-        Toast.makeText(this, "Время вышло!", Toast.LENGTH_SHORT).show()
-    }
+        fun updateTheSecondUI() {
+            button.visibility = Button.VISIBLE
+            button2.visibility = Button.INVISIBLE
+            slid.isEnabled = true
+            Toast.makeText(this, "Время вышло!", Toast.LENGTH_SHORT).show()
+        }
 
-    fun startTimer(int: Int){
-        i = int
+        button.setOnClickListener {
 
-        binding.buttonStart.setOnClickListener {
+            i = count
 
-            if (binding.progressBarCircular.progress > 0) {
+            if (circleProgress.progress > 0) {
                 Toast.makeText(this, "Время пошло!", Toast.LENGTH_SHORT).show()
             }
 
             val scope = CoroutineScope(Dispatchers.Main)
-
             scope.launch {
 
                 currentProgress = 0
-                i = binding.slider.value.toInt()
+                i = slid.value.toInt()
                 updateUI()
-                binding.progressBarCircular.max = i
-
+                circleProgress.max = i
 
                 while (i > 0) {
                     i--
                     currentProgress++
-                    binding.textik.text = i.toString()
-                    updateProgressBar()
+                    textik.text = i.toString()
+                    circleProgress.progress = currentProgress
                     delay(1000)
 
                     if (i == 0) {
                         cancel()
                         updateTheSecondUI()
-                        binding.textik.text = binding.slider.value.toInt().toString()
-                        binding.progressBarCircular.progress = 0
-                        binding.progressBarCircular.progressDrawable
+                        textik.text = slid.value.toInt().toString()
+                        circleProgress.progress = 0
+                        circleProgress.progressDrawable
                     }
                 }
             }
 
-            binding.buttonStop.setOnClickListener {
-                updateTheSecondUI()
-                binding.textik.text = binding.slider.value.toInt().toString()
-                binding.progressBarCircular.progress = 0
-                scope.cancel()
-            }
-            updateUI()
+                button2.setOnClickListener {
+                    updateTheSecondUI()
+                    textik.text = slid.value.toInt().toString()
+                    circleProgress.progress = 0
+                    scope.cancel()
+                }
+                updateUI()
+        }
+    }
+
+
+    suspend fun updateView(millis: Int){
+        withContext(Dispatchers.Main){
+            binding.textik.text = millis.toString()
+            binding.progressBarCircular.progress = millis
+            binding.slider.isEnabled = false
         }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(KEY_INT, i)
+        binding.textik.text = KEY_INT
         super.onSaveInstanceState(outState)
-        outState.putInt("KEY", i)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        savedInstanceState.getInt(KEY_INT)
         super.onRestoreInstanceState(savedInstanceState)
-        count = savedInstanceState.getInt(KEY)
-        startTimer(count)
     }
 }
