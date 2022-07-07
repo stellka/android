@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
     private var isTimerRun = false
     private val myScope = CoroutineScope(Dispatchers.Default + Job())
     private var process: Job? = null
-    private var i = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,53 +29,43 @@ class MainActivity : AppCompatActivity() {
         binding.slider.addOnChangeListener { _, _, _ ->
             binding.textik.text = binding.slider.value.toInt().toString()
             binding.progressBarCircular.max = binding.slider.value.toInt()
+            binding.progressBarCircular.progress = 360
         }
 
         binding.textik.text = "0"
-
 
         val value = savedInstanceState?.getInt(KEY)
         val isTimer = savedInstanceState?.getBoolean(KEY_TIMER_RUN, false)
 
         if (isTimer == true) {
             if (value != null) {
-                binding.progressBarCircular.progress = value
                 startTimer(value)
+                binding.buttonStop.setOnClickListener {
+                    stopProcess()
+                }
             }
         }
 
         binding.buttonStart.setOnClickListener {
-
             if (!isTimerRun) {
                 if (binding.progressBarCircular.progress > 0) {
                     binding.buttonStop.visibility = Button.VISIBLE
                     binding.buttonStart.visibility = Button.INVISIBLE
                     startTimer(binding.slider.value.toInt())
                 }
+
             } else {
-                updateTheSecondUI()
+                binding.buttonStart.visibility = Button.VISIBLE
+                binding.buttonStop.visibility = Button.INVISIBLE
             }
 
             isTimerRun = !isTimerRun
-            binding.slider.isEnabled = true
-            binding.buttonStop.visibility = Button.VISIBLE
-            binding.buttonStart.visibility = Button.INVISIBLE
+            binding.slider.isEnabled = !isTimerRun
 
             binding.buttonStop.setOnClickListener {
-                binding.progressBarCircular.progress = 360
-                isTimerRun = !isTimerRun
-                binding.textik.text = binding.slider.value.toInt().toString()
-                updateTheSecondUI()
-                process?.cancel()
+                stopProcess()
             }
         }
-    }
-
-    private fun updateTheSecondUI() {
-        binding.buttonStart.visibility = Button.VISIBLE
-        binding.buttonStop.visibility = Button.INVISIBLE
-        binding.slider.isEnabled = true
-        Toast.makeText(this, "Время вышло!", Toast.LENGTH_SHORT).show()
     }
 
     private suspend fun updateView(millis: Int) {
@@ -88,19 +77,34 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startTimer(start: Int) {
-
-        binding.slider.isEnabled = false
         process = myScope.launch(Dispatchers.Main) {
-            i = start
+            var i = start
             while (i > 0) {
+                binding.buttonStart.visibility = Button.INVISIBLE
+                binding.buttonStop.visibility = Button.VISIBLE
                 i--
                 updateView(i)
                 delay(1000)
+                isTimerRun = true
             }
-            if (i == 0) isTimerRun = false
+            if (i == 0)
+                Toast.makeText(this@MainActivity, "Время вышло!", Toast.LENGTH_SHORT).show()
+            isTimerRun = false
             updateView(binding.slider.value.toInt())
-            updateTheSecondUI()
+            binding.buttonStart.visibility = Button.VISIBLE
+            binding.buttonStop.visibility = Button.INVISIBLE
+            binding.slider.isEnabled = true
         }
+    }
+
+    private fun stopProcess() {
+        binding.progressBarCircular.progress = 360
+        isTimerRun = false
+        binding.textik.text = binding.slider.value.toInt().toString()
+        binding.buttonStart.visibility = Button.VISIBLE
+        binding.buttonStop.visibility = Button.INVISIBLE
+        binding.slider.isEnabled = true
+        process?.cancel()
     }
 
     override fun onDestroy() {
@@ -112,6 +116,5 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
         outState.putInt(KEY, binding.progressBarCircular.progress)
         outState.putBoolean(KEY_TIMER_RUN, isTimerRun)
-
     }
 }
