@@ -8,7 +8,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "edu.skillbox.homework11"
+        applicationId "edu.skillbox.datastorage"
         minSdk 27
         targetSdk 32
         versionCode 1

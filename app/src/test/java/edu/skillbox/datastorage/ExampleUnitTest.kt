@@ -1,4 +1,4 @@
-package edu.skillbox.homework11
+package edu.skillbox.datastorage
 
 import org.junit.Test
 

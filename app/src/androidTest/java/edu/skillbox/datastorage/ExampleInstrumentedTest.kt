@@ -1,4 +1,4 @@
-package edu.skillbox.homework11
+package edu.skillbox.datastorage
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("edu.skillbox.homework11", appContext.packageName)
+        assertEquals("edu.skillbox.datastorage", appContext.packageName)
     }
 }

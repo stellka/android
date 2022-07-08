@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Data Storage</string>
+    <string name="app_name">DataStorage</string>
+    <string name="save">Сохранить</string>
 </resources>

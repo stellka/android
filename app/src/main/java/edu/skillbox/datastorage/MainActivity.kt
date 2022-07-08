@@ -1,11 +1,9 @@
-package edu.skillbox.homework11
+package edu.skillbox.datastorage
 
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
-import androidx.fragment.app.Fragment
-import edu.skillbox.homework11.databinding.ActivityMainBinding
+import edu.skillbox.datastorage.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

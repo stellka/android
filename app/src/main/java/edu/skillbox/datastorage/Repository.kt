@@ -1,12 +1,10 @@
-package edu.skillbox.homework11
+package edu.skillbox.datastorage
 
 import android.content.Context
-import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Parcelable
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
-
 
 private const val PREFERENCE_NAME = "prefs_name"
 private const val SHARED_PREFS_KEY = "shared_prefs_key"
@@ -15,10 +13,10 @@ private const val SHARED_PREFS_KEY = "shared_prefs_key"
 class Repository : Parcelable {
 
     @IgnoredOnParcel
-    private var localValue = ""
+    var localValue = ""
 
     private fun getDataFromSharedPreference(context : Context) :String? {
-        val prefs = context.getSharedPreferences(PREFERENCE_NAME, MODE_PRIVATE)
+        val prefs = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
         return prefs.getString(SHARED_PREFS_KEY, null)
     }
 
@@ -28,7 +26,7 @@ class Repository : Parcelable {
     }
 
     fun saveText(text: String, context: Context){
-        val prefs = context.getSharedPreferences(PREFERENCE_NAME, MODE_PRIVATE)
+        val prefs = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
         localValue = text
         val editor: SharedPreferences.Editor = prefs.edit()
         editor.putString(SHARED_PREFS_KEY, text)
@@ -38,7 +36,7 @@ class Repository : Parcelable {
 
     fun clearText(context: Context) {
         localValue = ""
-        val prefs = context.getSharedPreferences(PREFERENCE_NAME, MODE_PRIVATE)
+        val prefs = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = prefs.edit()
         editor.clear()
         editor.apply()
