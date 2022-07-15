@@ -8,6 +8,7 @@ import retrofit2.http.GET
 
 private const val BASE_URL = "https://randomuser.me"
 
+
 object RetrofitServices {
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
@@ -21,5 +22,5 @@ object RetrofitServices {
 
 interface SearchUsersApi{
     @GET("/api/")
-    suspend fun getUsersInfoList(): List<Results>
+    suspend fun getUsersInfoList(): User
 }

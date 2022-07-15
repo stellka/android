@@ -4,16 +4,17 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 
+
 @JsonClass(generateAdapter = true)
-data class Results(
-    @Json(name = "info") val info: Info,
-    @Json(name = "results") val results: List<Result>
+data class User(
+    @Json(name = "info") val info: Info?,
+    @Json(name = "results") val results: List<Result>?
 )
 
 @JsonClass(generateAdapter = true)
 data class Info(
     @Json(name = "page") val page: Int,
-    @Json(name = "results") val results: Int,
+    @Json(name = "results") val results: Int?,
     @Json(name = "seed") val seed: String,
     @Json(name = "version") val version: String
 )
@@ -25,7 +26,7 @@ data class Result(
     @Json(name = "email") val email: String,
     @Json(name = "gender") val gender: String,
     @Json(name = "id") val id: Id,
-    @Json(name = "location") val location: Location,
+    @Json(name = "location") val location: Location?,
     @Json(name = "login") val login: Login,
     @Json(name = "name") val name: Name,
     @Json(name = "nat") val nat: String,
@@ -43,16 +44,16 @@ data class Dob(
 @JsonClass(generateAdapter = true)
 data class Id(
     @Json(name = "name") val name: String,
-    @Json(name = "value") val value: String
+    @Json(name = "value") val value: String?
 )
 
 @JsonClass(generateAdapter = true)
 data class Location(
-    @Json(name = "city") val city: String,
+    @Json(name = "city") val city: String?,
     @Json(name = "coordinates") val coordinates: Coordinates,
-    @Json(name = "country") val country: String,
-    @Json(name = "postcode") val postcode: Int,
-    @Json(name = "state") val state: String,
+    @Json(name = "country") val country: String?,
+    @Json(name = "postcode") val postcode: String?,
+    @Json(name = "state") val state: String?,
     @Json(name = "street") val street: Street,
     @Json(name = "timezone") val timezone: Timezone
 )
