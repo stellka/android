@@ -18,9 +18,14 @@ object RetrofitServices {
     val searchUsersApi: SearchUsersApi = retrofit.create(
         SearchUsersApi::class.java
     )
+
 }
 
 interface SearchUsersApi{
     @GET("/api/")
     suspend fun getUsersInfoList(): User
+
+
+    @GET("/api/")
+    suspend fun getPic(): Picture
 }
