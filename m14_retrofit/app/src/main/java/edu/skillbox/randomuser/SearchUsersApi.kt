@@ -24,8 +24,4 @@ object RetrofitServices {
 interface SearchUsersApi{
     @GET("/api/")
     suspend fun getUsersInfoList(): User
-
-
-    @GET("/api/")
-    suspend fun getPic(): Picture
 }

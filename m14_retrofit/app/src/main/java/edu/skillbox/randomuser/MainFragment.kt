@@ -9,8 +9,6 @@ import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 
-private const val BASE_URL = "https://randomuser.me/api/portraits/med/women/26.jpg"
-
 class MainFragment : Fragment(R.layout.fragment_main) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -18,12 +16,16 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         val textView = requireActivity().findViewById<TextView>(R.id.textView)
         val button = requireActivity().findViewById<Button>(R.id.button)
         val imageView = requireActivity().findViewById<ImageView>(R.id.imageView)
+        val textView1 = requireActivity().findViewById<TextView>(R.id.textView1)
 
         lifecycleScope.launchWhenStarted {
-            val user = RetrofitServices.searchUsersApi
-            val info = user.getUsersInfoList()
-            val pic = user.getPic().medium
-            textView.text = info.toString()
+            val user = RetrofitServices.searchUsersApi.getUsersInfoList()
+
+            textView.text = "Name: " + user.results.first().name.title + " " + user.results.first().name.first  +
+                    " " + user.results.first().name.last + "\n" + user.results.first().dob.age + " years old"
+            textView1.text = "Email: ${user.results.first().email} \nId: ${user.results.first().id.value} \n" +
+                    "Birthday: ${user.results.first().dob.date} \nPhone number: ${user.results.first().phone} \nRegistered ${user.results.first().registered.age} years ago"
+            val pic = user.results.first().picture.medium
             Glide.with(this@MainFragment)
                 .load(pic)
                 .centerCrop()
@@ -31,11 +33,16 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 .into(imageView)
         }
 
+
         button.setOnClickListener {
             lifecycleScope.launchWhenStarted {
                 val user = RetrofitServices.searchUsersApi.getUsersInfoList()
-                textView.text = user.toString()
-                val pic = RetrofitServices.searchUsersApi.getPic().medium
+
+                textView.text = "Name: " + user.results.first().name.title + " " + user.results.first().name.first  +
+                        " " + user.results.first().name.last + "\n" + user.results.first().dob.age + " years old"
+                textView1.text = "Email: ${user.results.first().email} \nId: ${user.results.first().id.value} \n" +
+                        "Birthday: ${user.results.first().dob.date} \nPhone number: ${user.results.first().phone} \nRegistered ${user.results.first().registered.age} years ago"
+                val pic = user.results.first().picture.medium
                 Glide.with(this@MainFragment)
                     .load(pic)
                     .centerCrop()
