@@ -26,6 +26,11 @@ class MainViewModel(private val wordDao: WordDao) : ViewModel() {
         }
     }
 
+    fun isWordHere(str: String) {
+        viewModelScope.launch {
+            wordDao.isWordHere(str)
+        }
+    }
 
 
     fun onUpdate(str: String) {
@@ -34,15 +39,9 @@ class MainViewModel(private val wordDao: WordDao) : ViewModel() {
         }
     }
 
-    val getAllForDelete = this.wordDao.getAllForDelete()
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000L),
-            initialValue = emptyList()
-        )
     fun onDeleteBtn() {
         viewModelScope.launch {
-            getAllForDelete.value.forEach { word -> wordDao.delete(word) }
+            wordDao.deleteAll()
         }
     }
 }

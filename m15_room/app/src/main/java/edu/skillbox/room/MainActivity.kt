@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import edu.skillbox.room.databinding.ActivityMainBinding
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.forEach
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -41,15 +42,17 @@ class MainActivity : AppCompatActivity() {
             } else {
                 binding.addBtn.isEnabled = true
                 binding.addBtn.setOnClickListener {
-                    if (viewModel.allWords.value.equals(str)) {
-                        viewModel.onUpdate(viewModel.allWords.value.first().word)
 
-                    } else if (viewModel.allWords.value.first().word.isEmpty() || viewModel.allWords.value.first().word != str){
-                        viewModel.onAddBtn(str)
+                    viewModel.onAddBtn(str)
+                    viewModel.allWords.value.forEach {
+                        if (it.word == str){
+                            viewModel.onUpdate(str)
+                        }else{
+                            viewModel.onAddBtn(str)
+                        }
                     }
                 }
             }
-
         }
 
         binding.deletebtn.setOnClickListener { viewModel.onDeleteBtn() }
