@@ -1,0 +1,13 @@
+Index: app/src/main/java/edu/skillbox/architecture/presentation/State.kt
+===================================================================
+diff --git a/app/src/main/java/edu/skillbox/architecture/presentation/State.kt b/app/src/main/java/edu/skillbox/architecture/presentation/State.kt
+deleted file mode 100644
+--- a/app/src/main/java/edu/skillbox/architecture/presentation/State.kt	(revision 557d55a0bd80dda480e9a3335773ed015f62df5e)
++++ /dev/null	(revision 557d55a0bd80dda480e9a3335773ed015f62df5e)
+@@ -1,6 +0,0 @@
+-package edu.skillbox.architecture.presentation
+-
+-sealed class State {
+-    object Loading: State()
+-    object Success: State()
+-}
