@@ -1,16 +1,19 @@
-package edu.skillbox.nasa.photolist
+package edu.skillbox.nasa.pagedlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingData
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
 import edu.skillbox.nasa.databinding.PhotoItemBinding
 import edu.skillbox.nasa.models.Photo
+import edu.skillbox.nasa.photolist.PhotoViewHolder
 
-class PhotoListAdapter(
+class PhotoPagedListAdapter(
     private val onClick: (Photo) -> Unit
-) : ListAdapter<Photo, PhotoViewHolder> (DiffUtilCallBack()) {
+) : PagingDataAdapter<Photo, PhotoViewHolder> (DiffUtilCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
         return PhotoViewHolder(
             PhotoItemBinding.inflate(
@@ -37,7 +40,9 @@ class PhotoListAdapter(
             }
         }
         holder.binding.root.setOnClickListener {
-            onClick(item)
+            item?.let {
+                    it1 -> onClick(it1)
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package edu.skillbox.nasa.api
 
+import edu.skillbox.nasa.models.PagedPhotosList
 import edu.skillbox.nasa.models.Photos
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -10,11 +11,19 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
 
+
 interface SearchMarsPhotosApi {
-    @GET("/api/v1/rovers/curiosity/photos")
-    suspend fun getPhotosInfoList(
-        @Query("api_key") api_key: String = "zspHzSkW9wgEltSBinicaIj2tWD1fRdhOsdsbnPS"
-    ): Photos
+    @Headers("X-API-KEY: $api_key")
+    @GET("api/v1/rovers/curiosity/photos?sol=1000")
+    suspend fun getPhotosInfoList(): Photos
+
+    @Headers("X-API-KEY: $api_key")
+    @GET("api/v1/rovers/curiosity/photos?sol=1000")
+    suspend fun topList(@Query("page") page : Int) : PagedPhotosList
+
+    private companion object{
+        private const val api_key = "zspHzSkW9wgEltSBinicaIj2tWD1fRdhOsdsbnPS"
+    }
 }
 
 val retrofit = Retrofit
