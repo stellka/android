@@ -17,5 +17,4 @@ class MainActivity : AppCompatActivity() {
             replace<MainFragment>(R.id.fragment_container)
         }
     }
-
 }
